@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     'corsheaders',
     'rest_framework',
+    'channels',
     'notes',
 ]
 
@@ -52,6 +54,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+# configuring middleware, i.e anything from 3000 post can access
+# OUR API of notes
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:3000',
+)
 
 ROOT_URLCONF = 'notes_project.urls'
 
@@ -70,6 +78,8 @@ TEMPLATES = [
         },
     },
 ]
+
+# for https requests
 
 WSGI_APPLICATION = 'notes_project.wsgi.application'
 
@@ -122,3 +132,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# for socket channels
+ASGI_APPLICATION = "notes_project.routing.application" #websocket
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
