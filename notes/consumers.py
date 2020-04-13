@@ -1,8 +1,8 @@
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
+from . import models
 import json 
 
-from . import models
 
 class NoteConsumer(WebsocketConsumer):
   def connect(self):

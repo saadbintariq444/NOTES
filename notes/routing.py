@@ -5,3 +5,4 @@ from . import consumers
 websocket_urlpatterns = [
   path('ws/notes', consumers.NoteConsumer)
 ]
+

@@ -6,9 +6,10 @@ import notes.routing
 # connect consymer with main routing
 
 application = ProtocolTypeRouter({
-   "websocket" : AuthMiddlewareStack(
+   'websocket' : AuthMiddlewareStack(
       URLRouter(
-          notes.routing.websocket_urlpatterns
-          )
+        notes.routing.websocket_urlpatterns
+        )
     )
 })
+
